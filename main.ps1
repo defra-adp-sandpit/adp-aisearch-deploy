@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("run")]
+    [ValidateSet("deploy")]
     [string]$Command,
     [Parameter(Mandatory)]
     [string]$ConfigDataFolderPath,
