@@ -8,7 +8,7 @@ param(
 )
 function Test-EnvironmentVariables {
     $requiredVariables = @(
-        "SEARCH_SERVICE_NAME", "PLATFORM_MI_NAME","TEAM_MI_NAME","SERVICE_MI_NAME",        
+        "SEARCH_SERVICE_NAME", "SEARCH_SERVICE_MI_NAME","TEAM_MI_NAME","SERVICE_MI_NAME",        
         "SSV_SHARED_SUBSCRIPTION_ID","AZURE_TENANT_ID","TEAM_MI_CLIENT_ID", 
         "KEY_VAULT_NAME", "SP_CLIENT_ID_KV", "SP_CLIENT_SECRET_KV"
     )
@@ -39,7 +39,7 @@ try {
 
     Write-LogInfo "Starting Deploy for $serviceName"
     Invoke-Deploy -searchServicesName $env:SEARCH_SERVICE_NAME -ConfigDataFolderPath $ConfigDataFolderPath `
-                     -apikey $env:TEAM_MI_CLIENT_ID
+                     -apikey $env:SEARCH_SERVICE_MI_NAME
     
     # Write-LogInfo "Starting post-Deploy..."        
     # Invoke-PostDeploy -ServiceMIName $env:SERVICE_MI_NAME -AdGroup $env:PG_READER_AD_GROUP `
