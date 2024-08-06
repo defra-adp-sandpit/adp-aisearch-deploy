@@ -38,8 +38,12 @@ try {
     #                     -SubscriptionId $env:SSV_SHARED_SUBSCRIPTION_ID -TenantId $env:AZURE_TENANT_ID 
 
     Write-LogInfo "Starting Deploy for $serviceName"
+
+    # az account set --subscription $env:SSV_SHARED_SUBSCRIPTION_ID
+    $token = az account get-access-token --scope https://search.azure.com/.default
+    $accessToken = ($token | ConvertFrom-Json).accessToken
     Invoke-Deploy -searchServicesName $env:SEARCH_SERVICE_NAME -ConfigDataFolderPath $ConfigDataFolderPath `
-                     -apikey $env:SEARCH_SERVICE_MI_NAME
+                     -apikey $accessToken
     
     # Write-LogInfo "Starting post-Deploy..."        
     # Invoke-PostDeploy -ServiceMIName $env:SERVICE_MI_NAME -AdGroup $env:PG_READER_AD_GROUP `

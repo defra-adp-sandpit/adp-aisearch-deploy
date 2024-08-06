@@ -41,9 +41,9 @@ function Invoke-Deploy {
         ForEach ($dir in $dirNames) {
             if (Test-Path -Path "$($ConfigDataFolderPath)/$dir") {
                 $Files = Get-ChildItem -Path "$($ConfigDataFolderPath)/$dir"
-                ForEach ($File in $Files) {            
-                    #Set-AzureSearchObject -Type $dir -Name $($File.Basename) -Source $($File.FullName) -SearchServicesName $searchServicesName -ApiKey $apikey            
-                    Write-LogInfo "dir: $dir, File: $($File.Basename) SearchServicesName: $searchServicesName, ApiKey: $apikey"
+                ForEach ($File in $Files) {
+                    Write-LogInfo "dir: $dir, File: $($File.Basename) SearchServicesName: $searchServicesName"
+                    Set-AzureSearchObject -Type $dir -Name $($File.Basename) -Source $($File.FullName) -SearchServicesName $searchServicesName -ApiKey $apikey                                
                 }
             }
             else {
