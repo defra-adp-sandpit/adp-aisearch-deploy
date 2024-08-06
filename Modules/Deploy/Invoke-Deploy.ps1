@@ -2,7 +2,7 @@ function Invoke-Deploy {
     param(
         [Parameter(Mandatory)]
         [string]$searchServicesName,
-        [string]$apikey,    
+        [string]$apikey,
         [string]$ConfigDataFolderPath
     )
 
@@ -38,12 +38,17 @@ function Invoke-Deploy {
         }
 
         $dirNames = @('datasources', 'indexes', 'skillsets', 'indexers')
-        ForEach ($dir in $dirNames) {    
-            $Files = Get-ChildItem -Path "$($ConfigDataFolderPath)/$dir"
-            ForEach ($File in $Files) {            
-                #Set-AzureSearchObject -Type $dir -Name $($File.Basename) -Source $($File.FullName) -SearchServicesName $searchServicesName -ApiKey $apikey            
-                Write-LogInfo "dir: $dir, File: $($File.Basename) SearchServicesName: $searchServicesName, ApiKey: $apikey"
+        ForEach ($dir in $dirNames) {
+            if (Test-Path -Path "$($ConfigDataFolderPath)/$dir") {
+                $Files = Get-ChildItem -Path "$($ConfigDataFolderPath)/$dir"
+                ForEach ($File in $Files) {            
+                    #Set-AzureSearchObject -Type $dir -Name $($File.Basename) -Source $($File.FullName) -SearchServicesName $searchServicesName -ApiKey $apikey            
+                    Write-LogInfo "dir: $dir, File: $($File.Basename) SearchServicesName: $searchServicesName, ApiKey: $apikey"
+                }
             }
+            else {
+                Write-LogInfo "Folder $dir does not exist. Skipping"
+            }            
         }        
         $exitCode = 0
     }

@@ -17,8 +17,8 @@
     )
 
     RequiredModules   = @(
-        '/Modules/Logger/Logger.psd1'
-        '/Modules/Auth/Auth.psd1'
+        './Modules/Logger/Logger.psd1'
+        './Modules/Auth/Auth.psd1'
     )
     
     CmdletsToExport   = @()

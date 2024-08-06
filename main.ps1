@@ -22,8 +22,8 @@ function Test-EnvironmentVariables {
 
 Set-StrictMode -Version 3.0
 
-Import-Module -Name Logger
-Import-Module -Name Deploy
+Import-Module -Name Logger -Force
+Import-Module -Name Deploy -Force
 
 try {
     
@@ -46,5 +46,5 @@ try {
     #                      -ClientId $env:TEAM_MI_CLIENT_ID
 }
 catch {
-    Write-LogError -Message "Deploy failed: $_"
+   Write-LogError -Message "Deploy failed: $_"
 }
