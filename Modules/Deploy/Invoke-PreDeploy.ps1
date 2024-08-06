@@ -1,12 +1,6 @@
 function Invoke-PreDeploy {
     param (
         [Parameter(Mandatory)]
-        [object]$Postgres,
-
-        [Parameter(Mandatory)]
-        [object]$DbAdmin,
-
-        [Parameter(Mandatory)]
         [object]$AdGroups,
 
         [Parameter(Mandatory)]
@@ -35,9 +29,6 @@ function Invoke-PreDeploy {
 
         $spnClientId = (Get-AzKeyVaultSecret -VaultName $KeyVaultName -Name $SPNSecretNames.clientIdName -AsPlainText).Trim()
         $spnClientSecret = (Get-AzKeyVaultSecret -VaultName $KeyVaultName -Name $SPNSecretNames.clientSecretName -AsPlainText).Trim()
-
-        # Grant PostgreSQL Database access
-        Write-LogInfo "Granting Database access to $ServiceMIName, $($AdGroups.DbReader) and $($AdGroups.DbWriter) for $($Postgres.DbName) on $($Postgres.Host)" 
         
         # Add member to AD Group
         Write-LogInfo "Adding member $TeamMIName to $($AdGroups.DbWriter)"
